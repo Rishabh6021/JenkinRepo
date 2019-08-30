@@ -15,6 +15,7 @@ User:user1
 Password:Reset123
 
 Ref:https://github.com/Vishwanathms/ 
+Ref:https://www.guru99.com/jenkins-pipeline-tutorial.html
 
 Go to 192.168.52.128:8080->Manage Jenkins->Configure System->Keep # of executors(It is a part of master) as 3 and Labels as Mas and Usage:Choose Only build jobs..->Save&Apply
 New Item->job1->Freestyle project->Ok .Specify labels->Save->Click Build Now in next screen
@@ -62,3 +63,7 @@ Job done based on :
 	-3rd party tool dependency
 
 CICD Administrator
+
+
+						                             Pipeline
+-https://www.cloudbees.com/sites/default/files/declarative-pipeline-refcard.pdf
