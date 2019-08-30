@@ -1,0 +1,64 @@
+								JENKINS
+Terminology:
+cicd administrator
+-Job:a unit of work for project
+-View:user defined collection of jobs
+-Master:the central Jenkins master,does job scheduling
+-Slave:executes one or more jobs within slots(executors)
+-Workspace
+-Plugin:Needs plugins like Maven and Junit plugins to get work done.
+
+								SETUP
+Got to VMWare Workstation Pro->Open Virtual Machine->Fetch Jenkins-Complete-installed virtualmahine from->VMDK->Jenkins-Complete-installed
+Go to vM ->Wired Connect->Check IP and paste in Browser IP:8080 eg 192.168.52.128:8080
+User:user1
+Password:Reset123
+
+Ref:https://github.com/Vishwanathms/ 
+
+Go to 192.168.52.128:8080->Manage Jenkins->Configure System->Keep # of executors(It is a part of master) as 3 and Labels as Mas and Usage:Choose Only build jobs..->Save&Apply
+New Item->job1->Freestyle project->Ok .Specify labels->Save->Click Build Now in next screen
+Configure->Build Environment->Abort the build if it's stuck ,Absolute and mins-1 and Timeout-actions :Fail the build->Build->Command as sleep 70 ->save->Build Now
+Configure->Build Environment->Abort the build if it's stuck ,No Activity  and sec 30  and Timeout-actions :Fail the build and sleep 25->Build Now
+
+Job1->Configure->Discard old builds->Strategy:LogRotation->Days:2 and max # builds:3->Build Now
+In this case ,Jenkins keeps atleast one successful build and and other 3 builds including it or not depends on the status of other builds.
+Timeout takes precedence over throttle if there is no concurrency availability.
+Configure->Build Triggers->Build periodically->Schedule as *****->
+30 minutes 
+10PM-3AM
+10-20(of month)
+Tue,Thurs,Sat
+Sep,Nov,Dec
+H/30 22-23,0-3 10-20 9,11,12 2,4,6
+
+
+Go to 192.168.52.128:8080->Manage Jenkins->Manage Plugins->available Tab->Filter:role->Role manager plugin->Install
+Manage Jenkins->Configure Global Security->Select Role-based Strategy under Authorization->Apply and Save
+Manage Jenkins->Manage and Assign roles 
+
+
+Creating Jobs using Jenkins CLI-
+
+	-Manage jenkins->Jenkins CLI->  Download jenkins-cli.jar
+        -Run cmd from the folder where jar is downloaded 
+	-Execute java -jar jenkins-cli.jar -s http://192.168.52.129:8080/ -auth user1:Reset123 list-jobs
+
+
+
+
+Commands:
+-Restart: jenkins.service restart
+
+
+
+
+Executors:define how many jobs can I run parallely.
+
+Job done based on :
+	-time based
+	-previous job 
+	-manual based
+	-3rd party tool dependency
+
+CICD Administrator
